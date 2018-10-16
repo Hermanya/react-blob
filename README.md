@@ -1,3 +1,5 @@
+![screenshot](https://user-images.githubusercontent.com/2906365/47053390-adfc2b80-d17a-11e8-8c85-48a1ea1ce4d3.gif)
+
 # react-blob
 
 > React component that looks like liquid in space
