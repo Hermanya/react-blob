@@ -21,16 +21,17 @@
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
   "peerDependencies": {
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "styled-components": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "@types/styled-components": "^4.0.1",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
@@ -46,7 +47,8 @@
     "rollup-plugin-postcss-modules": "1.0.8",
     "rollup-plugin-typescript2": "^0.13.0",
     "rollup-plugin-url": "^1.4.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "styled-components": "^4.0.0"
   },
   "files": [
     "dist"

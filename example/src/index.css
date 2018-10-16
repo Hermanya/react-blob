@@ -1,5 +1,19 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.small-container {
+  max-width: 50em;
+}
+
+.delay-01s {
+  animation-delay: 0.1s;
+}
+
+.delay-02s {
+  animation-delay: 0.2s;
+}
+
+.delay-03s {
+  animation-delay: 0.3s;
 }

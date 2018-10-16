@@ -13,19 +13,31 @@ npm install --save react-blob
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import { Blob } from 'react-blob'
 
-import MyComponent from 'react-blob'
+const Avatar = ({src, alt}) =>
+  <Blob size="100px" src={src} alt={alt}/>
 
-class Example extends React.Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
-}
+const FunnyLinkButton = ({href, ...props}) =>
+  <a href={href}><Blob size="2em" {...props}/></a>
+
+const BackgroundBlob = ({style, props}) =>
+  <Blob size="100vh"
+    style={{
+        position: 'absolute',
+        top: '-15%',
+        right: '-15%',
+        zIndex: -1,
+        backgroundColor: '#21D4FD',
+        color: 'white',
+        opacity: 0.05,
+        fontSize: '50vh',
+        ...style
+    }}
+    {...props}
+  />
 ```
 
 ## License
 
-MIT © [Hermanya](https://github.com/Hermanya)
+MIT © [Hermanya](https://hermanya.github.io/)
