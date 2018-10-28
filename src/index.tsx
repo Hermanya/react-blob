@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled, {keyframes, css} from 'styled-components'
-// import * as PropTypes from 'prop-types'
 
 const spin = keyframes`
   to {
@@ -8,7 +7,6 @@ const spin = keyframes`
   }
 `
 const spinParams = '22s linear infinite'
-
 
 const Shape = styled.div`
   transition: border-radius 1s ease-out;
@@ -47,34 +45,22 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
 `
+const randomRadiuses = (x:number) =>  new Array(x).fill(1).map(() => radiuses[Math.random() * radiuses.length | 0]).join(' ')
 const radiuses = ['70%','60%', '50%', '40%', '55%', '45%']
-const makeRadius1 = () => (
-  new Array(4).fill(1).map(() => radiuses[Math.random() * radiuses.length | 0]).join(' ')
-  + ' / ' +
-  new Array(4).fill(1).map(() => radiuses[Math.random() * radiuses.length | 0]).join(' ')
-)
-const makeRadius2 = () => (
-  new Array(2).fill(1).map(() => radiuses[Math.random() * radiuses.length | 0]).join(' ')
-)
+const makeRadius1 = () => randomRadiuses(4) + ' / ' + randomRadiuses(4)
+const makeRadius2 = () => randomRadiuses(2)
 
-export const Blob = ({src, children, size, ...props}:{src: string, size: string, children: any}) => {
-  let radius1 =  makeRadius1() || '60% 40% 30% 70% / 60% 30% 70% 40%'
-  let radius2 = makeRadius2() || '40% 60%'
-  return (
-    <Shape size={size} radius1={radius1} radius2={radius2} {...props}>
-      <ShapeContent>
-        {src ? <Image src={src}></Image> : children}
-      </ShapeContent>
-    </Shape>
-  )
+export class Blob extends React.PureComponent<any> {
+  render () {
+    let {src, children, size, ...props} = this.props
+    let radius1 =  makeRadius1()
+    let radius2 = makeRadius2()
+    return (
+      <Shape size={size} radius1={radius1} radius2={radius2} {...props}>
+        <ShapeContent>
+          {src ? <Image src={src}></Image> : children}
+        </ShapeContent>
+      </Shape>
+    )
+  }
 }
-
-// Blob.propTypes = {
-//   src: PropTypes.string,
-//   size: PropTypes.string
-// }
-
-// Blob.defaultProps = {
-//   src: undefined,
-//   size: '100%'
-// }
