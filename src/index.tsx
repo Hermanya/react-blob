@@ -1,6 +1,11 @@
 import * as React from 'react'
 import styled, {keyframes, css} from 'styled-components'
 
+type BlobProps = {
+  src?: string;
+  size?: string | number;
+} & React.HTMLAttributes<HTMLElement>
+
 const spin = keyframes`
   to {
     transform: rotate(1turn);
@@ -8,15 +13,19 @@ const spin = keyframes`
 `
 const spinParams = '22s linear infinite'
 
-const Shape = styled.div`
+type ShapeProps = {
+  size?: string | number; radius1: string; radius2: string;
+}
+
+const Shape = styled.div<ShapeProps>`
   transition: border-radius 1s ease-out;
   transform-origin: center;
   overflow: hidden;
-  ${(props:{size: string}) => props.size && css`
+  ${(props) => props.size && css`
     width: ${props.size};
     height: ${props.size};
   `}
-  ${(props:any) => css`
+  ${(props) => css`
     border-radius: ${props.radius1};
     animation: ${keyframes`
       0% {
@@ -50,7 +59,7 @@ const radiuses = ['70%','60%', '50%', '40%', '55%', '45%']
 const makeRadius1 = () => randomRadiuses(4) + ' / ' + randomRadiuses(4)
 const makeRadius2 = () => randomRadiuses(2)
 
-export class Blob extends React.PureComponent<any> {
+export class Blob extends React.PureComponent<BlobProps> {
   render () {
     let {src, children, size, ...props} = this.props
     let radius1 =  makeRadius1()
