@@ -24,6 +24,7 @@ const BackgroundBlob = ({style, props}) =>
         fontSize: '50vh',
         ...style
     }}
+    animationDuration="60s"
     {...props}
   />`;
 
@@ -100,6 +101,7 @@ export default class App extends Component {
             opacity: 0.15,
             fontSize: "50vh"
           }}
+          animationDuration="60s"
         >
           <i className="fab fa-react"></i>
         </Blob>

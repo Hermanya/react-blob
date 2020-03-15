@@ -4,6 +4,22 @@ import styled, { keyframes, css } from "styled-components";
 type BlobProps = {
   src?: string;
   size?: string | number;
+  /**
+   * Default is "15s"
+   */
+  animationDuration?: string;
+  /**
+   * Default is "linear"
+   */
+  animationTimingFunction?: "ease" | "linear" | "ease-in-out";
+  /**
+   * Default is undefined, but you could set it to something like "2s"
+   */
+  animationDelay?: string;
+  /**
+   * Default is "infinite"
+   */
+  animationIterationCount?: "infinite" | number;
 } & React.HTMLAttributes<HTMLElement>;
 
 const spin = keyframes`
@@ -11,12 +27,12 @@ const spin = keyframes`
     transform: rotate(1turn);
   }
 `;
-const spinParams = "22s linear infinite";
 
 type ShapeProps = {
   size?: string | number;
   radius1: string;
   radius2: string;
+  spinParams: string;
 };
 
 const Shape = styled.div<ShapeProps>`
@@ -39,12 +55,12 @@ const Shape = styled.div<ShapeProps>`
         border-radius: ${props.radius2};
       }
     `} ${(Math.random() * 10) | (0 + 10)}s ease-in-out infinite both alternate,
-      ${spin} ${spinParams};
+      ${spin} ${props.spinParams};
   `}
 `;
 
-const ShapeContent = styled.div`
-  animation: ${spin} ${spinParams} reverse;
+const ShapeContent = styled.div<{ spinParams: string }>`
+  animation: ${spin} ${props => props.spinParams} reverse;
   transform-origin: center;
   height: 100%;
   width: 100%;
@@ -67,17 +83,38 @@ const radiuses = ["70%", "60%", "50%", "40%", "55%", "45%"];
 const makeRadius1 = () => randomRadiuses(4) + " / " + randomRadiuses(4);
 const makeRadius2 = () => randomRadiuses(2);
 
-export class Blob extends React.PureComponent<BlobProps> {
-  render() {
-    let { src, children, size, ...props } = this.props;
-    let radius1 = makeRadius1();
-    let radius2 = makeRadius2();
-    return (
-      <Shape size={size} radius1={radius1} radius2={radius2} {...props}>
-        <ShapeContent>
-          {src ? <Image src={src}></Image> : children}
-        </ShapeContent>
-      </Shape>
-    );
-  }
-}
+export const Blob: React.FC<BlobProps> = ({
+  src,
+  children,
+  size,
+  animationDuration,
+  animationTimingFunction,
+  animationDelay,
+  animationIterationCount,
+  ...props
+}) => {
+  let radius1 = makeRadius1();
+  let radius2 = makeRadius2();
+  const spinParams = `${animationDuration} ${animationTimingFunction} ${animationDelay} ${animationIterationCount}`;
+
+  return (
+    <Shape
+      size={size}
+      radius1={radius1}
+      radius2={radius2}
+      spinParams={spinParams}
+      {...props}
+    >
+      <ShapeContent spinParams={spinParams}>
+        {src ? <Image src={src}></Image> : children}
+      </ShapeContent>
+    </Shape>
+  );
+};
+
+Blob.defaultProps = {
+  animationDuration: "15s",
+  animationTimingFunction: "linear",
+  animationDelay: "",
+  animationIterationCount: "infinite"
+};
