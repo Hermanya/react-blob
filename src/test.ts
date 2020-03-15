@@ -1,7 +1,7 @@
-import {Blob} from './'
+import { Blob } from "./";
 
-describe('Blob', () => {
-  it('is truthy', () => {
-    expect(Blob).toBeTruthy()
-  })
-})
+describe("Blob", () => {
+  it("is truthy", () => {
+    expect(Blob).toBeTruthy();
+  });
+});
